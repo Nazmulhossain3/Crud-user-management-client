@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { baseURL } from "../../config/config";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
 
     const [userData, setUserData] = useState({
         name: '',
@@ -27,8 +30,35 @@ const Register = () => {
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form Data:', userData);
-        // Perform any additional actions with the form data
+       
+        fetch(`${baseURL}/user-route/createUser`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log('data', data);
+          if (data) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Great user is created",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+          navigate('/login')
+        })
+  
+        
+  
+        
+  
+       
+        
       };
 
 

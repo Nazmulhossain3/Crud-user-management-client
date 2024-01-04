@@ -70,12 +70,12 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-xl">
-            <li>
+            <Link to='/'><li>
               <a>Register</a>
-            </li>
-            <li>
+            </li></Link>
+           <Link to='/addUser'> <li>
               <a>Add User</a>
-            </li>
+            </li></Link>
             <li>
               <a>Dashboard</a>
             </li>
